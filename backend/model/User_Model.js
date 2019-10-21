@@ -13,13 +13,11 @@ module.exports = {
     return User.findOne({ email: email, password: password });
   },
 
-  addUser: (email, password, fullname, dob, phone) => {
+  addUser: (email, password, fullname) => {
     User.create({
       email,
       password,
-      fullname,
-      dob,
-      phone
+      fullname
     });
   }
 };

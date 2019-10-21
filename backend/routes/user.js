@@ -2,7 +2,8 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
 const { check, validationResult } = require('express-validator');
-const moment = require('moment');
+const bcrypt = require('bcrypt');
+const saltRounds = 5;
 
 const User_Model = require('./../model/User_Model');
 
@@ -33,33 +34,25 @@ router.post(
       .not()
       .isEmpty()
       .isLength({ min: 6, max: 25 })
-      .trim(),
-    check('dob').custom(value => {
-      let valueFormated = moment(value).format('YYYY-MM-DD');
-      if (moment(valueFormated).isValid() === false) {
-        throw new Error('Ngày sinh không hợp lệ!');
-      }
-      return valueFormated;
-    }),
-    check('phone').isMobilePhone()
+      .trim()
   ],
-  (req, res, next) => {
+  async (req, res, next) => {
     //Check Validator
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(422).json({ errors: errors.array() });
     }
+    try {
+      //Hash Password
+      const passHashed = await bcrypt.hash(req.body.password, saltRounds);
 
-    //Add User To
-    User_Model.addUser(
-      req.body.email,
-      req.body.password,
-      req.body.fullname,
-      moment(req.body.dob).format('YYYY-MM-DD'),
-      req.body.phone
-    );
+      //Add User To
+      await User_Model.addUser(req.body.email, passHashed, req.body.fullname);
+    } catch (error) {
+      res.json({ register: false });
+    }
 
-    res.json('Register Successfullly');
+    res.json({ register: true });
   }
 );
 

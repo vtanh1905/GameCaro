@@ -1,5 +1,6 @@
 const passport = require('passport');
 const passportJWT = require('passport-jwt');
+const bcrypt = require('bcrypt');
 
 const JWTStrategy = passportJWT.Strategy;
 const ExtractJWT = passportJWT.ExtractJwt;
@@ -15,16 +16,23 @@ passport.use(
     },
     async function(email, password, cb) {
       try {
-        const user = await User_Model.getUserByEmailAndPassword(
-          email,
-          password
-        );
+        const user = await User_Model.getUserByEmail(email);
 
         if (!user) {
           return cb(null, false, { message: 'Incorrect email or password.' });
         }
 
-        return cb(null, { user }, { message: 'Logged In Successfully.' });
+        const checkPassword = await bcrypt.compare(password, user.password);
+
+        if (!checkPassword) {
+          return cb(null, false, { message: 'Incorrect email or password.' });
+        }
+
+        return cb(
+          null,
+          { user: { email: user.email } },
+          { message: 'Logged In Successfully.' }
+        );
       } catch (error) {
         return cb(error);
       }
@@ -39,7 +47,12 @@ passport.use(
       secretOrKey: 'HayTraoChoAnh'
     },
     async function(jwt_payload, cb) {
-      return cb(null, jwt_payload.user);
+      try {
+        const user = await User_Model.getUserByEmail(jwt_payload.user.email);
+        return cb(null, { email: user.email, fullname: user.fullname });
+      } catch (error) {
+        return cb(null, { error: true });
+      }
     }
   )
 );
