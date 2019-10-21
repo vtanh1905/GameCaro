@@ -18,3 +18,18 @@ export const backBoard = index => ({
 export const orderHistory = () => ({
   type: types.ORDER_HISTORY
 });
+
+export const fetchData = data => ({
+  type: types.FETCH_DATA,
+  data
+});
+
+export const fetchDataRequest = () => {
+  return dispatch => {
+    // eslint-disable-next-line no-undef
+    return fetch('https://pokeapi.co/api/v2/pokemon/ditto/').then(res => {
+      dispatch(fetchData(res));
+      console.log(res);
+    });
+  };
+};

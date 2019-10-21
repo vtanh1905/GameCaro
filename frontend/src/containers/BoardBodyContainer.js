@@ -4,7 +4,7 @@ import BoardBody from '../components/BoardBody';
 import * as actions from '../actions/index';
 
 const BoardBodyContainer = props => {
-  const { caro , handleClickSquare, handleResetBoard} = props;
+  const { caro, handleClickSquare, handleResetBoard } = props;
 
   return (
     <div>

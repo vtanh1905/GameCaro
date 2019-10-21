@@ -5,13 +5,13 @@ h1 {
 td {
     width: 35px;
     height: 35px;
-    cursor : pointer;
+    cursor: pointer;
 }
 
 table {
     margin: 5px auto;
     /* border: 2px solid black; */
-    
+
 }
 
 .vert {
@@ -22,4 +22,9 @@ table {
 .hori {
     border-top: 2px solid black;
     border-bottom: 2px solid black;
+}
+
+body {
+    background: url(./../images/bg.jpg) no-repeat center center fixed;
+    background-size: cover;
 }
