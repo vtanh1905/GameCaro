@@ -1,0 +1,25 @@
+h1 {
+    text-align: center;
+}
+
+td {
+    width: 35px;
+    height: 35px;
+    cursor : pointer;
+}
+
+table {
+    margin: 5px auto;
+    /* border: 2px solid black; */
+    
+}
+
+.vert {
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+}
+
+.hori {
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+}
