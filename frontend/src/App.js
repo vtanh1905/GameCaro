@@ -1,32 +1,19 @@
-// import React from 'react';
-// import Board from './components/Board';
-// import HistoryContainer from './containers/HistoryContainer';
-
-// const App = () => {
-//   return (
-//     <div className="container-fluid pt-3">
-//       <div className="row">
-//         <div className="col-10">
-//           <Board />
-//         </div>
-//         <div className="col-2">
-//           <HistoryContainer />
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default App;
-
 import React from 'react';
-import Lobby from './components/Lobby';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+
+import routes from './routes/index';
 
 const App = () => {
   return (
-    <div>
-      <Lobby />
-    </div>
+    <Router>
+      <Switch>
+        {routes.map(item => (
+          <Route exact={item.exact} path={item.path} key={item.path}>
+            {item.component()}
+          </Route>
+        ))}
+      </Switch>
+    </Router>
   );
 };
 

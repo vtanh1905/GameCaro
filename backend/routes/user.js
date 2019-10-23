@@ -19,7 +19,7 @@ router.post(
           const user = await User_Model.getUserByEmail(email);
 
           if (user !== null) {
-            throw new Error('Email đã tồn tại!');
+            throw 'Email đã tồn tại!';
           }
           return email;
         } catch (error) {

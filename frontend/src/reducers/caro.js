@@ -1,6 +1,6 @@
 /* eslint-disable consistent-return */
 import * as types from '../constants/index';
-import * as CaroBoard from '../helper/Caro';
+import * as CaroBoard from '../utils/Caro';
 
 const createMatrix = (row, col) => {
   const matrix = [];
