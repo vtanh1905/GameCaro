@@ -4,16 +4,12 @@ import { useHistory } from 'react-router-dom';
 
 const Lobby = props => {
   const { user } = props;
-  let history = useHistory();
-  if (user === null) {
-    history.push('/login');
-  }
 
-  const getUser = async () => {
-    const res = await props.user;
-    const user = await res.json();
-    return user;
-  };
+  let history = useHistory();
+  console.log(history);
+  // if (user === null) {
+  //   history.push('/login');
+  // }
 
   const handlePlay = () => {
     history.push('/play');
@@ -53,7 +49,14 @@ const Lobby = props => {
             className="btn btn-info btn-lg btn-block"
             onClick={handlePlay}
           >
-            Chơi Game
+            Chơi Với Người
+          </button>
+          <button
+            type="button"
+            className="btn btn-secondary btn-lg btn-block"
+            onClick={handlePlay}
+          >
+            Chơi Với Máy
           </button>
           <button
             type="button"

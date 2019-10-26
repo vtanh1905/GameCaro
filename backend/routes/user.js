@@ -12,7 +12,7 @@ const router = express.Router();
 router.post(
   '/register',
   [
-    check('email')
+    check('email', 'Email không hợp lệ')
       .isEmail()
       .custom(async email => {
         try {
@@ -26,11 +26,11 @@ router.post(
           throw new Error(error);
         }
       }),
-    check('password')
+    check('password', 'Password từ 6 đến 12 ký tự')
       .not()
       .isEmpty()
       .isLength({ min: 6, max: 12 }),
-    check('fullname')
+    check('fullname', 'Password từ 6 đến 25 ký tự')
       .not()
       .isEmpty()
       .isLength({ min: 6, max: 25 })

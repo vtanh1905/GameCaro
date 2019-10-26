@@ -3,11 +3,10 @@ import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
-// eslint-disable-next-line import/no-named-as-default
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-import reducers from './reducers/index';
+import reducers from 'tools/redux/reducers';
 
 const store = createStore(reducers, applyMiddleware(thunk));
 

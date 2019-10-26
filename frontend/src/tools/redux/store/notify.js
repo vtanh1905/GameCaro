@@ -1,5 +1,5 @@
 /* eslint-disable consistent-return */
-import * as types from '../constants/index';
+import * as types from 'tools/redux/constants';
 
 const initialState = {
   errorRegister: '',

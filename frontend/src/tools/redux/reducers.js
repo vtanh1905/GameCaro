@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
-import caro from './caro';
-import notify from './notify';
-import user from './user';
+import caro from './store/caro';
+import notify from './store/notify';
+import user from './store/user';
 
 const reducers = combineReducers({
   caro,

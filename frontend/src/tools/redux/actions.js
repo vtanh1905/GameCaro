@@ -1,4 +1,4 @@
-import * as types from '../constants/index';
+import * as types from './constants';
 
 /**
 |--------------------------------------------------
@@ -43,7 +43,11 @@ export const registerRequest = user => {
         if (data.register) {
           return true;
         }
-        dispatch(changeNotifyErrorRegister('Thông tin không hợp lệ!'));
+        if (data.errors[0].value === '') {
+          dispatch(changeNotifyErrorRegister('Vui lòng nhập thông tin đầy đủ'));
+        } else {
+          dispatch(changeNotifyErrorRegister(data.errors[0].msg));
+        }
         return false;
       });
   };
@@ -69,6 +73,8 @@ export const loginRequest = user => {
           dispatch(changeNotifyErrorLogin('Email hoặc mật khẩu không đúng!'));
           return false;
         }
+        console.log(data.user);
+
         localStorage.setItem('token', JSON.stringify(data.token));
         return true;
       });

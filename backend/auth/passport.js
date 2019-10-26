@@ -30,7 +30,7 @@ passport.use(
 
         return cb(
           null,
-          { user: { email: user.email } },
+          { user: { email: user.email, fullname: user.fullname } },
           { message: 'Logged In Successfully.' }
         );
       } catch (error) {

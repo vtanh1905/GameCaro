@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "baseUrl": "src",
+    "paths": {
+      "pages": ["pages/"],
+      "routes": ["routes/index"],
+      "redux_actions": ["tools/redux/actions/index"],
+      "redux_constants": ["tools/redux/constants/index"],
+      "redux_reducers": ["tools/redux/reducers/index"]
+    }
+  },
+  "include": ["src"]
+}

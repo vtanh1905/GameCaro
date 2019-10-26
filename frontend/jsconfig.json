@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "checkJs": false,
+    "baseUrl": "src",
+    "paths": {
+      "pages": ["pages/"],
+      "configs": ["configs/"],
+      "tools/redux/actions": ["tools/redux/actions"],
+      "tools/redux/constants": ["tools/redux/constants"],
+      "tools/redux/reducers": ["tools/redux/reducers"]
+    }
+  },
+  "include": ["src"]
+}

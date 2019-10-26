@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Login from '../components/Login';
-import * as actions from '../actions/index';
+import Login from './Login';
+import * as actions from 'tools/redux/actions';
 
 const LoginContainer = props => {
   const { handleLogin, errorLogin, user } = props;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Register from '../components/Register';
-import * as actions from '../actions/index';
+import Register from './Register';
+import * as actions from 'tools/redux/actions';
 
 const RegisterContainer = props => {
   const { handleRegister, errorRegister, user } = props;
