@@ -15,6 +15,7 @@ const NoMatch = () => {
           src="./images//no-found.jpg"
           className="img-fluid"
           alt="Responsive image"
+          aria-hidden
         />
       </div>
       <div className="d-flex justify-content-center mt-5">

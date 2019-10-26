@@ -3,10 +3,10 @@ import { Container, Card, Button, Form, Alert } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 
 const Login = props => {
-  const { handleLogin, errorLogin, user } = props;
+  const { handleLogin, errorLogin } = props;
   let history = useHistory();
 
-  if (user !== null) {
+  if (JSON.parse(localStorage.getItem('token')) !== null) {
     history.push('/');
   }
 

@@ -1,15 +1,21 @@
 import React from 'react';
 import { Container, Card, Media } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Lobby = props => {
+  let history = useHistory();
   const { user } = props;
 
-  let history = useHistory();
-  console.log(history);
-  // if (user === null) {
-  //   history.push('/login');
-  // }
+  if (JSON.parse(localStorage.getItem('token')) === null) {
+    history.push('/login');
+    return <></>;
+  } else {
+    //To Do When Have Token
+    if (user === null) {
+      return <></>;
+    }
+  }
 
   const handlePlay = () => {
     history.push('/play');
@@ -35,8 +41,13 @@ const Lobby = props => {
               alt="Generic placeholder"
             />
             <Media.Body>
-              <h5>Vũ Tuấn Anh</h5>
-              <p>Win : 10 - Lose 5</p>
+              <h5>
+                <Link to="profile">{user.fullname}</Link>
+              </h5>
+              <p>
+                Win : {user.matches.win} - Lose {user.matches.lose} - Tie{' '}
+                {user.matches.tie}
+              </p>
             </Media.Body>
           </Media>
         </Card.Body>

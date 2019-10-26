@@ -4,22 +4,17 @@ import Register from './Register';
 import * as actions from 'tools/redux/actions';
 
 const RegisterContainer = props => {
-  const { handleRegister, errorRegister, user } = props;
+  const { handleRegister, errorRegister } = props;
 
   return (
     <div>
-      <Register
-        errorRegister={errorRegister}
-        handleRegister={handleRegister}
-        user={user}
-      />
+      <Register errorRegister={errorRegister} handleRegister={handleRegister} />
     </div>
   );
 };
 
 const mapStateToProps = state => ({
-  errorRegister: state.notify.errorRegister,
-  user: state.user
+  errorRegister: state.notify.errorRegister
 });
 
 const mapDispatchToProps = dispatch => {

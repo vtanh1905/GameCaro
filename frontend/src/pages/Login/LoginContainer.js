@@ -4,18 +4,17 @@ import Login from './Login';
 import * as actions from 'tools/redux/actions';
 
 const LoginContainer = props => {
-  const { handleLogin, errorLogin, user } = props;
+  const { handleLogin, errorLogin } = props;
 
   return (
     <div>
-      <Login handleLogin={handleLogin} errorLogin={errorLogin} user={user} />
+      <Login handleLogin={handleLogin} errorLogin={errorLogin} />
     </div>
   );
 };
 
 const mapStateToProps = state => ({
-  errorLogin: state.notify.errorLogin,
-  user: state.user
+  errorLogin: state.notify.errorLogin
 });
 
 const mapDispatchToProps = dispatch => {

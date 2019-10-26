@@ -1,24 +1,14 @@
 /* eslint-disable consistent-return */
 import * as types from 'tools/redux/constants';
 
-// const initialState = (() => {
-//   const token = JSON.parse(localStorage.getItem('token'));
-//   //   console.log(token);
-//   if (token === null) {
-//     return null;
-//   }
-//   return fetch('http://localhost:3001/me', {
-//     headers: {
-//       'Content-Type': 'application/json',
-//       Authorization: `Bearer ${token}`
-//     }
-//   });
-// })();
-
 const initialState = null;
 
 export default function board(state = initialState, action) {
+  let user = JSON.parse(JSON.stringify(state));
   switch (action.type) {
+    case types.SAVE_USER:
+      user = action.user;
+      return user;
     default:
       return state;
   }

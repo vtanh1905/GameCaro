@@ -30,7 +30,13 @@ passport.use(
 
         return cb(
           null,
-          { user: { email: user.email, fullname: user.fullname } },
+          {
+            user: {
+              email: user.email,
+              fullname: user.fullname,
+              matches: user.matches
+            }
+          },
           { message: 'Logged In Successfully.' }
         );
       } catch (error) {
@@ -49,7 +55,12 @@ passport.use(
     async function(jwt_payload, cb) {
       try {
         const user = await User_Model.getUserByEmail(jwt_payload.user.email);
-        return cb(null, { email: user.email, fullname: user.fullname });
+
+        return cb(null, {
+          email: user.email,
+          fullname: user.fullname,
+          matches: user.matches
+        });
       } catch (error) {
         return cb(null, { error: true });
       }

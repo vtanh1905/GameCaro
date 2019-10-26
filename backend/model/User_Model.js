@@ -17,7 +17,12 @@ module.exports = {
     User.create({
       email,
       password,
-      fullname
+      fullname,
+      matches: {
+        win: 0,
+        lose: 0,
+        tie: 0
+      }
     });
   }
 };

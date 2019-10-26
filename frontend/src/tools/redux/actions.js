@@ -26,6 +26,33 @@ export const orderHistory = () => ({
 
 /**
 |--------------------------------------------------
+| User
+|--------------------------------------------------
+*/
+
+export const saveUser = user => ({
+  type: types.SAVE_USER,
+  user
+});
+
+/**
+|--------------------------------------------------
+| Notify
+|--------------------------------------------------
+*/
+
+export const changeNotifyErrorRegister = msg => ({
+  type: types.CHANGE_NOTIFY_ERROR_REGISTER,
+  msg
+});
+
+export const changeNotifyErrorLogin = msg => ({
+  type: types.CHANGE_NOTIFY_ERROR_LOGIN,
+  msg
+});
+
+/**
+|--------------------------------------------------
 | Register
 |--------------------------------------------------
 */
@@ -73,9 +100,8 @@ export const loginRequest = user => {
           dispatch(changeNotifyErrorLogin('Email hoặc mật khẩu không đúng!'));
           return false;
         }
-        console.log(data.user);
-
         localStorage.setItem('token', JSON.stringify(data.token));
+        dispatch(saveUser(data.user));
         return true;
       });
   };
@@ -83,16 +109,22 @@ export const loginRequest = user => {
 
 /**
 |--------------------------------------------------
-| Notify
+| Token
 |--------------------------------------------------
 */
 
-export const changeNotifyErrorRegister = msg => ({
-  type: types.CHANGE_NOTIFY_ERROR_REGISTER,
-  msg
-});
-
-export const changeNotifyErrorLogin = msg => ({
-  type: types.CHANGE_NOTIFY_ERROR_LOGIN,
-  msg
-});
+export const getUserFromToken = () => {
+  return dispatch => {
+    return fetch('http://localhost:3001/me', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${JSON.parse(localStorage.getItem('token'))}`
+      }
+    })
+      .then(res => res.json())
+      .then(data => {
+        dispatch(saveUser(data));
+      });
+  };
+};

@@ -1,23 +1,52 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Lobby from './Lobby';
-// import * as actions from '../actions/index';
+import * as actions from 'tools/redux/actions';
 
-const LoginContainer = props => {
-  const { user } = props;
+// const LobbyContainer = props => {
+//   const { user } = props;
 
-  return (
-    <div>
-      <Lobby user={user} />
-    </div>
-  );
-};
+//   return (
+//     <div>
+//       <Lobby user={user} />
+//     </div>
+//   );
+// };
+
+export class LobbyContainer extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {};
+  }
+
+  UNSAFE_componentWillMount() {
+    this.props.handleGetUserFromToken();
+  }
+
+  render() {
+    const { user } = this.props;
+    return (
+      <div>
+        <Lobby user={user} />
+      </div>
+    );
+  }
+}
 
 const mapStateToProps = state => ({
   user: state.user
 });
 
+const mapDispatchToProps = dispatch => {
+  return {
+    handleGetUserFromToken: () => {
+      return dispatch(actions.getUserFromToken());
+    }
+  };
+};
+
 export default connect(
   mapStateToProps,
-  null
-)(LoginContainer);
+  mapDispatchToProps
+)(LobbyContainer);

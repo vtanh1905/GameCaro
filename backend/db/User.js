@@ -4,7 +4,12 @@ var userSchema = new mongoose.Schema(
   {
     email: String,
     password: String,
-    fullname: String
+    fullname: String,
+    matches: {
+      win: Number,
+      lose: Number,
+      tie: Number
+    }
   },
   { versionKey: false }
 );

@@ -3,11 +3,11 @@ import { Container, Card, Button, Form, Alert } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 
 const Register = props => {
-  const { handleRegister, errorRegister, user } = props;
+  const { handleRegister, errorRegister } = props;
 
   const history = useHistory();
 
-  if (user !== null) {
+  if (JSON.parse(localStorage.getItem('token')) !== null) {
     history.push('/');
   }
 
