@@ -8,9 +8,11 @@
   },
   "dependencies": {
     "bcrypt": "^3.0.6",
+    "cloudinary": "^1.16.0",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "express": "~4.16.1",
+    "express-fileupload": "^1.1.6-alpha.6",
     "express-validator": "^6.2.0",
     "hbs": "~4.0.4",
     "http-errors": "~1.6.3",

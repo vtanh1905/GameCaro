@@ -9,7 +9,8 @@ var userSchema = new mongoose.Schema(
       win: Number,
       lose: Number,
       tie: Number
-    }
+    },
+    avatarURL: String
   },
   { versionKey: false }
 );

@@ -59,7 +59,8 @@ passport.use(
         return cb(null, {
           email: user.email,
           fullname: user.fullname,
-          matches: user.matches
+          matches: user.matches,
+          avatarURL: user.avatarURL
         });
       } catch (error) {
         return cb(null, { error: true });

@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Lobby from './Lobby';
+import Profile from './Profile';
 import * as actions from 'tools/redux/actions';
 
-export class LobbyContainer extends React.Component {
+export class ProfileContainer extends React.Component {
   constructor(props) {
     super(props);
 
@@ -15,23 +15,33 @@ export class LobbyContainer extends React.Component {
   }
 
   render() {
-    const { user } = this.props;
+    const { user, errorProfile, handleChangeNotifyError } = this.props;
+
     return (
       <div>
-        <Lobby user={user} />
+        <Profile
+          user={user}
+          errorProfile={errorProfile}
+          handleChangeNotifyError={handleChangeNotifyError}
+        />
       </div>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  user: state.user
+  user: state.user,
+  errorProfile: state.notify.errorProfile
 });
 
 const mapDispatchToProps = dispatch => {
   return {
     handleGetUserFromToken: () => {
       return dispatch(actions.getUserFromToken());
+    },
+
+    handleChangeNotifyError: msg => {
+      return dispatch(actions.changeNotifyErrorProfile(msg));
     }
   };
 };
@@ -39,4 +49,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(LobbyContainer);
+)(ProfileContainer);

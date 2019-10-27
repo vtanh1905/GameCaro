@@ -7,11 +7,11 @@ const Lobby = props => {
   let history = useHistory();
   const { user } = props;
 
+  //Kiểm Tra Login chưa
   if (JSON.parse(localStorage.getItem('token')) === null) {
     history.push('/login');
     return <></>;
   } else {
-    //To Do When Have Token
     if (user === null) {
       return <></>;
     }
@@ -37,8 +37,8 @@ const Lobby = props => {
             <img
               style={{ maxWidth: '3rem' }}
               className="mr-3"
-              src="images/avatar.jpg"
-              alt="Generic placeholder"
+              src={user.avatarURL === '' ? 'images/avatar.jpg' : user.avatarURL}
+              alt="Avatar"
             />
             <Media.Body>
               <h5>

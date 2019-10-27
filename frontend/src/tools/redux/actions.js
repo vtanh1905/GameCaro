@@ -51,6 +51,11 @@ export const changeNotifyErrorLogin = msg => ({
   msg
 });
 
+export const changeNotifyErrorProfile = msg => ({
+  type: types.CHANGE_NOTIFY_ERROR_PROFILE,
+  msg
+});
+
 /**
 |--------------------------------------------------
 | Register

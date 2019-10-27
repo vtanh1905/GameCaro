@@ -22,7 +22,12 @@ module.exports = {
         win: 0,
         lose: 0,
         tie: 0
-      }
+      },
+      avatarURL: ''
     });
+  },
+
+  updateUserByEmail: (email, data) => {
+    return User.updateOne({ email }, data);
   }
 };

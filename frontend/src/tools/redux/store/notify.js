@@ -3,7 +3,8 @@ import * as types from 'tools/redux/constants';
 
 const initialState = {
   errorRegister: '',
-  errorLogin: ''
+  errorLogin: '',
+  errorProfile: ''
 };
 
 export default function notify(state = initialState, action) {
@@ -14,6 +15,9 @@ export default function notify(state = initialState, action) {
       return notify;
     case types.CHANGE_NOTIFY_ERROR_LOGIN:
       notify.errorLogin = action.msg;
+      return notify;
+    case types.CHANGE_NOTIFY_ERROR_PROFILE:
+      notify.errorProfile = action.msg;
       return notify;
     default:
       return state;
