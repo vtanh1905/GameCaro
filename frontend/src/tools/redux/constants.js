@@ -6,7 +6,10 @@
 export const CLICK_SQUARE = 'CLICK_SQUARE';
 export const RESET_BOARD = 'RESET_BOARD';
 export const BACK_BOARD = 'BACK_BOARD';
+export const BACK_BOARD_WITH_BOT = 'BACK_BOARD_WITH_BOT';
 export const ORDER_HISTORY = 'ORDER_HISTORY';
+export const USER_CLICK_SQUARE = 'USER_CLICK_SQUARE';
+export const BOT_CLICK_SQUARE = 'BOT_CLICK_SQUARE';
 
 /**
 |--------------------------------------------------

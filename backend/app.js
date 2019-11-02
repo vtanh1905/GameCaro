@@ -10,7 +10,7 @@ require('./auth/passport');
 var app = express();
 
 app.use(function(req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
   res.header(
     'Access-Control-Allow-Headers',
     'Origin, X-Requested-With, Content-Type, Accept, Authorization'
@@ -19,6 +19,7 @@ app.use(function(req, res, next) {
     'Access-Control-Allow-Methods',
     'GET,PUT,POST,DELETE,PATCH,OPTIONS'
   );
+  res.header('Access-Control-Allow-Credentials', true);
   next();
 });
 
@@ -38,6 +39,9 @@ require('./db/_connect');
 
 //Add Router
 require('./routes/_index')(app);
+
+//Socket.io
+require('./socket/index')(app);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

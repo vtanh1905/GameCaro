@@ -12,7 +12,7 @@ const NoMatch = () => {
     <div className="container">
       <div className="card mt-5">
         <img
-          src="./images//no-found.jpg"
+          src="/images/no-found.jpg"
           className="img-fluid"
           alt="Responsive image"
           aria-hidden

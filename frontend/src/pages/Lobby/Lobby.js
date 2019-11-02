@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Container, Card, Media } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import io from 'socket.io-client';
 
 const Lobby = props => {
   let history = useHistory();
@@ -17,8 +18,8 @@ const Lobby = props => {
     }
   }
 
-  const handlePlay = () => {
-    history.push('/play');
+  const handlePlay = url => {
+    history.push(url);
   };
 
   const handleLogout = () => {
@@ -58,14 +59,14 @@ const Lobby = props => {
           <button
             type="button"
             className="btn btn-info btn-lg btn-block"
-            onClick={handlePlay}
+            onClick={() => handlePlay('play/caro/online')}
           >
             Chơi Với Người
           </button>
           <button
             type="button"
             className="btn btn-secondary btn-lg btn-block"
-            onClick={handlePlay}
+            onClick={() => handlePlay('play/caro/offline')}
           >
             Chơi Với Máy
           </button>

@@ -284,4 +284,24 @@ function CheckChienThang(board, character, rowSelected, colSelected) {
   return false;
 }
 
-export { CheckChienThang, lineWin };
+function BotCaro(board, character) {
+  const MAX_ROW = board.length;
+  const MAX_COL = board[0].length;
+
+  let index = Math.floor(Math.random() * MAX_ROW * MAX_COL);
+  let i = Math.floor(index / MAX_ROW);
+  let j = index - i * MAX_ROW;
+
+  while (board[i][j] !== null) {
+    index = Math.floor(Math.random() * MAX_ROW * MAX_COL);
+    i = Math.floor(index / MAX_ROW);
+    j = index % MAX_COL;
+  }
+
+  return {
+    i,
+    j
+  };
+}
+
+export { CheckChienThang, lineWin, BotCaro };

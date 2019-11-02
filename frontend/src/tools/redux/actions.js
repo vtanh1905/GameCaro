@@ -20,8 +20,23 @@ export const backBoard = index => ({
   index
 });
 
+export const backBoardWithBot = index => ({
+  type: types.BACK_BOARD_WITH_BOT,
+  index
+});
+
 export const orderHistory = () => ({
   type: types.ORDER_HISTORY
+});
+
+export const userClickQuare = (i, j) => ({
+  type: types.USER_CLICK_SQUARE,
+  i,
+  j
+});
+
+export const botClickQuare = () => ({
+  type: types.BOT_CLICK_SQUARE
 });
 
 /**
