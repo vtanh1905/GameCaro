@@ -1,15 +1,8 @@
 import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
-import { useHistory } from 'react-router-dom';
 
 const Notify = props => {
-  let history = useHistory();
-  const { isPlayer1Win, show, handleResetBoard, userName, botName } = props;
-
-  const handleBackToLobby = () => {
-    history.push('/');
-    handleResetBoard();
-  };
+  const { isPlayer1Win, show, userName, botName, handleBackToLobby } = props;
 
   return (
     <Modal show={show} onHide={() => {}}>
@@ -20,7 +13,7 @@ const Notify = props => {
         {isPlayer1Win ? botName : userName} Win
       </Modal.Body>
       <Modal.Footer className="justify-content-center">
-        <Button onClick={handleBackToLobby}>Again</Button>
+        <Button onClick={handleBackToLobby}>Xác nhận</Button>
       </Modal.Footer>
     </Modal>
   );

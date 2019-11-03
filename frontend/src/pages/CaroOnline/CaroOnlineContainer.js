@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Lobby from './Lobby';
+import CaroOnline from './CaroOnline';
 import * as actions from 'tools/redux/actions';
 
-export class LobbyContainer extends React.Component {
+export class CaroOnlineContainer extends Component {
   constructor(props) {
     super(props);
 
@@ -15,33 +15,19 @@ export class LobbyContainer extends React.Component {
   }
 
   render() {
-    const { user, io, handleSaveCompetitor } = this.props;
-
-    return (
-      <div>
-        <Lobby
-          user={user}
-          io={io}
-          handleSaveCompetitor={handleSaveCompetitor}
-        />
-      </div>
-    );
+    const { user } = this.props;
+    return <CaroOnline user={user}></CaroOnline>;
   }
 }
 
 const mapStateToProps = state => ({
-  user: state.user,
-  io: state.io
+  user: state.user
 });
 
 const mapDispatchToProps = dispatch => {
   return {
     handleGetUserFromToken: () => {
       return dispatch(actions.getUserFromToken());
-    },
-
-    handleSaveCompetitor: competitor => {
-      return dispatch(actions.saveCompetitor(competitor));
     }
   };
 };
@@ -49,4 +35,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(LobbyContainer);
+)(CaroOnlineContainer);

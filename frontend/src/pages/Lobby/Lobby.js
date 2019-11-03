@@ -1,12 +1,14 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import { Container, Card, Media } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import io from 'socket.io-client';
+
+import ModalFindMatch from './components/ModalFindMatch';
 
 const Lobby = props => {
+  const [showModal, setShowModal] = useState(false);
   let history = useHistory();
-  const { user } = props;
+  const { user, io, handleSaveCompetitor } = props;
 
   //Kiểm Tra Login chưa
   if (JSON.parse(localStorage.getItem('token')) === null) {
@@ -18,13 +20,29 @@ const Lobby = props => {
     }
   }
 
-  const handlePlay = url => {
-    history.push(url);
+  const handlePlayWithBot = () => {
+    history.push('play/caro/offline');
   };
 
   const handleLogout = () => {
     localStorage.removeItem('token');
     history.push('/login');
+  };
+
+  const handlePlayOnline = () => {
+    setShowModal(true);
+    io.emit('CLIENT_SEND_FIND_MATCH', { user });
+    io.on('SERVER_SEND_INFO_COMPETITOR', req => {
+      handleSaveCompetitor(req.user);
+
+      //Move to Play
+      history.push('/play/caro/online');
+    });
+  };
+
+  const handleCancelPlayOnline = () => {
+    setShowModal(false);
+    io.emit('CLIENT_SEND_CANCEL_FIND_MATCH', { user });
   };
 
   return (
@@ -53,22 +71,21 @@ const Lobby = props => {
           </Media>
         </Card.Body>
       </Card>
-
       <div className="d-flex justify-content-center mt-5">
         <div style={{ maxWidth: '25rem' }}>
           <button
             type="button"
             className="btn btn-info btn-lg btn-block"
-            onClick={() => handlePlay('play/caro/online')}
+            onClick={() => handlePlayOnline()}
           >
-            Chơi Với Người
+            Đấu
           </button>
           <button
             type="button"
             className="btn btn-secondary btn-lg btn-block"
-            onClick={() => handlePlay('play/caro/offline')}
+            onClick={() => handlePlayWithBot()}
           >
-            Chơi Với Máy
+            Luyện tập
           </button>
           <button
             type="button"
@@ -79,6 +96,14 @@ const Lobby = props => {
           </button>
         </div>
       </div>
+      {showModal ? (
+        <ModalFindMatch
+          showModal={showModal}
+          handleCancelPlayOnline={handleCancelPlayOnline}
+        />
+      ) : (
+        ''
+      )}
     </Container>
   );
 };

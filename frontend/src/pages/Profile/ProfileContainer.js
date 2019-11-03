@@ -16,7 +16,6 @@ export class ProfileContainer extends React.Component {
 
   render() {
     const { user, errorProfile, handleChangeNotifyError } = this.props;
-
     return (
       <div>
         <Profile

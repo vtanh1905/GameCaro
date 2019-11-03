@@ -1,6 +1,6 @@
 /**
 |--------------------------------------------------
-| Game
+| Caro With Bot
 |--------------------------------------------------
 */
 export const CLICK_SQUARE = 'CLICK_SQUARE';
@@ -13,10 +13,25 @@ export const BOT_CLICK_SQUARE = 'BOT_CLICK_SQUARE';
 
 /**
 |--------------------------------------------------
+| Caro With Online
+|--------------------------------------------------
+*/
+export const DRAW_CHAR_SQUARE = 'DRAW_CHAR_SQUARE';
+export const RESET_BOARD_ONLINE = 'RESET_BOARD_ONLINE';
+
+/**
+|--------------------------------------------------
 | User
 |--------------------------------------------------
 */
 export const SAVE_USER = 'SAVE_USER';
+
+/**
+|--------------------------------------------------
+| COMPETITOR
+|--------------------------------------------------
+*/
+export const SAVE_COMPETITOR = 'SAVE_COMPETITOR';
 
 /**
 |--------------------------------------------------

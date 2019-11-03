@@ -5,6 +5,7 @@ import LoginContainer from 'pages/Login/LoginContainer';
 import RegisterContainer from 'pages/Register/RegisterContainer';
 import ProfileContainer from 'pages/Profile/ProfileContainer';
 import CaroWithBotContrainer from 'pages/CaroWithBot/CaroWithBotContrainer';
+import CaroOnlineContainer from 'pages/CaroOnline/CaroOnlineContainer';
 import NoMatch from 'pages/NoMatch/NoMatch';
 
 export default [
@@ -32,6 +33,11 @@ export default [
     path: '/play/caro/offline',
     exact: false,
     component: () => <CaroWithBotContrainer />
+  },
+  {
+    path: '/play/caro/online',
+    exact: false,
+    component: () => <CaroOnlineContainer />
   },
   {
     path: '*',

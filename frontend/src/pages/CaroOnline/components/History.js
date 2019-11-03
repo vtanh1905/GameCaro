@@ -6,7 +6,6 @@ const History = props => {
     orderHistory,
     handleOrderHistory,
     handleBackBoard,
-    indexCurrent,
     namePlayer1,
     namePlayer2
   } = props;
@@ -24,10 +23,8 @@ const History = props => {
             key={idx}
             onClick={() => handleBackBoard(index)}
             type="button"
-            className={`list-group-item list-group-item-action list-group-item-primary ${
-              index === indexCurrent ? 'active' : ''
-            }`}
-            disabled={historyBoard[index].turnPlayer1}
+            className={`list-group-item list-group-item-action`}
+            disabled
           >
             #{index + 1} {item.turnPlayer1 ? namePlayer1 : namePlayer2}
             :({item.i},{convertNumberToCharacter(item.j)})
@@ -42,10 +39,8 @@ const History = props => {
             key={String(index)}
             onClick={() => handleBackBoard(index)}
             type="button"
-            className={`list-group-item list-group-item-action list-group-item-primary ${
-              index === indexCurrent ? 'active' : ''
-            }`}
-            disabled={historyBoard[index].turnPlayer1}
+            className={`list-group-item list-group-item-action`}
+            disabled
           >
             #{index + 1} {item.turnPlayer1 ? namePlayer1 : namePlayer2}
             :({item.i},{convertNumberToCharacter(item.j)})

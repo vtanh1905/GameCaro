@@ -3,7 +3,7 @@ import * as types from 'tools/redux/constants';
 
 const initialState = null;
 
-export default function board(state = initialState, action) {
+export default function user(state = initialState, action) {
   let user = JSON.parse(JSON.stringify(state));
   switch (action.type) {
     case types.SAVE_USER:

@@ -41,6 +41,22 @@ export const botClickQuare = () => ({
 
 /**
 |--------------------------------------------------
+| Board Online
+|--------------------------------------------------
+*/
+export const drawCharSquare = (i, j, char) => ({
+  type: types.DRAW_CHAR_SQUARE,
+  i,
+  j,
+  char
+});
+
+export const resetBoardOnline = () => ({
+  type: types.RESET_BOARD_ONLINE
+});
+
+/**
+|--------------------------------------------------
 | User
 |--------------------------------------------------
 */
@@ -48,6 +64,17 @@ export const botClickQuare = () => ({
 export const saveUser = user => ({
   type: types.SAVE_USER,
   user
+});
+
+/**
+|--------------------------------------------------
+| COMPETITOR
+|--------------------------------------------------
+*/
+
+export const saveCompetitor = competitor => ({
+  type: types.SAVE_COMPETITOR,
+  competitor
 });
 
 /**
