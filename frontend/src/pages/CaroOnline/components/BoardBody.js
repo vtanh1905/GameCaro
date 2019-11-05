@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import InfoPlayer from './InfoPlayer';
 import Square from './Square';
 import Notify from './Notify';
+import NotifyYesNo from './NotifyYesNo';
 import { useHistory } from 'react-router-dom';
 
 const BoardBody = props => {
@@ -13,11 +14,23 @@ const BoardBody = props => {
     competitor,
     io,
     handleDrawCharSquare,
-    handleResetBoard
+    handleResetBoard,
+    handleUndo,
+    handleSetValueUndo,
+    historyBoard
   } = props;
 
   const [myTurn, setMyTurn] = useState(competitor.isHost ? false : true);
   const [competitorExit, setCompetitorExit] = useState(false);
+  const [competitorAskUndo, setCompetitorAskUndo] = useState(false);
+  if (historyBoard.length < 3) {
+    handleSetValueUndo(true);
+  }
+  useEffect(() => {
+    return () => {
+      io.removeAllListeners();
+    };
+  }, [io]);
 
   const handleClickSquare = (i, j) => {
     const myChar = competitor.isHost ? 'O' : 'X';
@@ -26,6 +39,10 @@ const BoardBody = props => {
       io.emit('CLIENT_SEND_POSITION_BOARD', { user, i, j });
       handleDrawCharSquare(i, j, myChar);
       setMyTurn(false);
+      if (historyBoard.length > 3) {
+        // handleToggleValueUndo();
+        handleSetValueUndo(true);
+      }
     }
   };
 
@@ -33,15 +50,29 @@ const BoardBody = props => {
     const yourChar = competitor.isHost ? 'X' : 'O';
     if (!myTurn) {
       handleDrawCharSquare(req.i, req.j, yourChar);
+      if (historyBoard.length >= 3) {
+        // handleToggleValueUndo();
+        handleSetValueUndo(false);
+      }
     }
     io.removeListener('SERVER_SEND_POSITION_BOARD_COMPETITOR');
     setMyTurn(true);
   });
 
   // Đối thủ bỏ ket nối
-  io.on('SERVER_SEND_COMPETITOR_EXIT', req => {
-    console.log(req);
+  io.on('SERVER_SEND_COMPETITOR_EXIT', () => {
     setCompetitorExit(true);
+  });
+
+  //Doi thu xin di lai
+  io.on('SERVER_SEND_COMPETITOR_ASK_UNDO', () => {
+    setCompetitorAskUndo(true);
+    //handleSetValueUndo(true);
+  });
+
+  io.on('SERVER_SEND_AGREE_COMPETITOR_ASK_UNDO', () => {
+    handleUndo();
+    handleSetValueUndo(false);
   });
 
   const handleBackToLobby = () => {
@@ -207,6 +238,20 @@ const BoardBody = props => {
         botName={competitor.fullname}
         handleBackToLobby={handleBackToLobby}
       />
+
+      <NotifyYesNo
+        show={competitorAskUndo}
+        handleYes={() => {
+          setCompetitorAskUndo(false);
+          handleUndo();
+          io.emit('CLIENT_SEND_AGREE_COMPETITOR_ASK_UNDO', { user });
+        }}
+        handleNo={() => {
+          setCompetitorAskUndo(false);
+        }}
+      >
+        Đối thủ xin đi lại
+      </NotifyYesNo>
     </div>
   );
 };

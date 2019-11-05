@@ -5,6 +5,7 @@ import user from './store/user';
 import io from './store/io';
 import competitor from './store/competitor';
 import caroOnline from './store/caroOnline';
+import undo from './store/undo';
 
 const reducers = combineReducers({
   caro,
@@ -12,7 +13,8 @@ const reducers = combineReducers({
   user,
   io,
   competitor,
-  caroOnline
+  caroOnline,
+  undo
 });
 
 export default reducers;

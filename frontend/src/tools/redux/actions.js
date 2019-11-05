@@ -55,6 +55,19 @@ export const resetBoardOnline = () => ({
   type: types.RESET_BOARD_ONLINE
 });
 
+export const backBoardOnline = () => ({
+  type: types.BACK_BOARD_ONLINE
+});
+
+export const setValueUndo = value => ({
+  type: types.SET_VALUE_UNDO,
+  value
+});
+
+export const toggleValueUndo = () => ({
+  type: types.TOGGLE_VALUE_UNDO
+});
+
 /**
 |--------------------------------------------------
 | User

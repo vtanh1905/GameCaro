@@ -71,6 +71,14 @@ export default function boardOnline(state = initialState, action) {
       caroOnline.indexCurrent = 0;
       return caroOnline;
 
+    case types.BACK_BOARD_ONLINE:
+      const backLength = caroOnline.historyBoard.length - 3;
+      if (backLength < 0) return caroOnline;
+      caroOnline.board = caroOnline.historyBoard[backLength].board;
+      caroOnline.turnPlayer1 = !caroOnline.historyBoard[backLength].turnPlayer1;
+      caroOnline.indexCurrent = backLength;
+      return caroOnline;
+
     default:
       return state;
   }

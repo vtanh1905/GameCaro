@@ -12,7 +12,9 @@ const BoardBodyContainer = props => {
     competitor,
     io,
     handleDrawCharSquare,
-    handleResetBoard
+    handleResetBoard,
+    handleUndo,
+    handleSetValueUndo
   } = props;
 
   if (competitor === null) {
@@ -27,11 +29,14 @@ const BoardBodyContainer = props => {
         turnPlayer1={caro.turnPlayer1}
         showModal={caro.showModal}
         lineWin={caro.lineWin}
+        historyBoard={caro.historyBoard}
         user={user}
         competitor={competitor}
         io={io}
         handleDrawCharSquare={handleDrawCharSquare}
         handleResetBoard={handleResetBoard}
+        handleUndo={handleUndo}
+        handleSetValueUndo={handleSetValueUndo}
       />
     </div>
   );
@@ -49,9 +54,17 @@ const mapDispatchToProps = dispatch => {
     handleDrawCharSquare: (i, j, char) => {
       dispatch(actions.drawCharSquare(i, j, char));
     },
-
     handleResetBoard: () => {
       dispatch(actions.resetBoardOnline());
+    },
+    handleUndo: () => {
+      dispatch(actions.backBoardOnline());
+    },
+    handleSetValueUndo: value => {
+      dispatch(actions.setValueUndo(value));
+    },
+    handleToggleValueUndo: () => {
+      dispatch(actions.toggleValueUndo());
     }
   };
 };

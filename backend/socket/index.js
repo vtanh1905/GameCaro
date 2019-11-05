@@ -76,9 +76,10 @@ module.exports = app => {
       | Xử lý TH người chơi thoát khỏi phòng
       |--------------------------------------------------
       */
-      socket.on('CLIENT_SEND_EXIT_ROOM', req => {
-        console.log(req);
-      });
+      // socket.on('CLIENT_SEND_EXIT_ROOM', req => {
+      //   console.log(req);
+      // });
+
       socket.on('disconnect', () => {
         console.log('A user disconected');
         //Kêu người chơi còn lại thoát
@@ -104,6 +105,75 @@ module.exports = app => {
         socket
           .to(matches[indexPlayerInRoom].roomID)
           .emit('SERVER_SEND_POSITION_BOARD_COMPETITOR', { i, j });
+      });
+
+      /**
+      |--------------------------------------------------
+      | Các TH Xin Hòa, Xin Thua, Xin Undo
+      |--------------------------------------------------
+      */
+
+      //Xin thua
+      socket.on('CLIENT_SEND_GIVE_UP', req => {
+        const { user } = req;
+        const indexPlayerInRoom = matches.findIndex(
+          item =>
+            item.player[0].email === user.email ||
+            item.player[1].email === user.email
+        );
+        socket
+          .to(matches[indexPlayerInRoom].roomID)
+          .emit('SERVER_SEND_COMPETITOR_EXIT', {});
+      });
+
+      //Xin Hòa
+      socket.on('CLIENT_SEND_ASK_TIE', req => {
+        const { user } = req;
+        const indexPlayerInRoom = matches.findIndex(
+          item =>
+            item.player[0].email === user.email ||
+            item.player[1].email === user.email
+        );
+        socket
+          .to(matches[indexPlayerInRoom].roomID)
+          .emit('SERVER_SEND_COMPETITOR_ASK_TIE', {});
+      });
+
+      socket.on('CLIENT_SEND_AGREE_COMPETITOR_ASK_TIE', req => {
+        const { user } = req;
+        const indexPlayerInRoom = matches.findIndex(
+          item =>
+            item.player[0].email === user.email ||
+            item.player[1].email === user.email
+        );
+        socket
+          .to(matches[indexPlayerInRoom].roomID)
+          .emit('SERVER_SEND_AGREE_COMPETITOR_ASK_TIE', {});
+      });
+
+      // Xin đi lại
+      socket.on('CLIENT_SEND_ASK_UNDO', req => {
+        const { user } = req;
+        const indexPlayerInRoom = matches.findIndex(
+          item =>
+            item.player[0].email === user.email ||
+            item.player[1].email === user.email
+        );
+        socket
+          .to(matches[indexPlayerInRoom].roomID)
+          .emit('SERVER_SEND_COMPETITOR_ASK_UNDO', {});
+      });
+ 
+      socket.on('CLIENT_SEND_AGREE_COMPETITOR_ASK_UNDO', req => {
+        const { user } = req;
+        const indexPlayerInRoom = matches.findIndex(
+          item =>
+            item.player[0].email === user.email ||
+            item.player[1].email === user.email
+        );
+        socket
+          .to(matches[indexPlayerInRoom].roomID)
+          .emit('SERVER_SEND_AGREE_COMPETITOR_ASK_UNDO', {});
       });
     });
   });
