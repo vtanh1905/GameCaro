@@ -3,6 +3,7 @@ import InfoPlayer from './InfoPlayer';
 import Square from './Square';
 import Notify from './Notify';
 import NotifyYesNo from './NotifyYesNo';
+import ChatBox from './ChatBox';
 import { useHistory } from 'react-router-dom';
 
 const BoardBody = props => {
@@ -224,6 +225,7 @@ const BoardBody = props => {
           )}
         </div>
       </div>
+      <ChatBox user={user} io={io} />
       <Notify
         show={showModal}
         isPlayer1Win={myTurn}

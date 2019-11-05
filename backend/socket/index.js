@@ -163,7 +163,7 @@ module.exports = app => {
           .to(matches[indexPlayerInRoom].roomID)
           .emit('SERVER_SEND_COMPETITOR_ASK_UNDO', {});
       });
- 
+
       socket.on('CLIENT_SEND_AGREE_COMPETITOR_ASK_UNDO', req => {
         const { user } = req;
         const indexPlayerInRoom = matches.findIndex(
@@ -174,6 +174,24 @@ module.exports = app => {
         socket
           .to(matches[indexPlayerInRoom].roomID)
           .emit('SERVER_SEND_AGREE_COMPETITOR_ASK_UNDO', {});
+      });
+
+      /**
+      |--------------------------------------------------
+      | Chat
+      |--------------------------------------------------
+      */
+      socket.on('CLIENT_SEND_MESSAGE', req => {
+        console.log(req);
+        const { user, msg } = req;
+        const indexPlayerInRoom = matches.findIndex(
+          item =>
+            item.player[0].email === user.email ||
+            item.player[1].email === user.email
+        );
+        socket
+          .to(matches[indexPlayerInRoom].roomID)
+          .emit('SERVER_SEND_MESSAGE', { msg });
       });
     });
   });
